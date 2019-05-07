@@ -56,30 +56,121 @@ const runners = [{"id":1,"first_name":"Charmain","last_name":"Seiler","email":"c
 // ==== Challenge 1: Use .forEach() ====
 // The event director needs both the first and last names of each runner for their running bibs.  Combine both the first and last names into a new array called fullName. 
 let fullName = [];
-runners.forEach(function(cb) {
-console.log(fullName);
+//i did the the old way for testing purposes
+// for(let i = 0; i < runners.length; i++){
+// fullName.push(`${runners[i].first_name} ${runners[i].last_name}`);
+// }
+// console.log(fullName);
+
+runners.forEach(function(names){
+     
+    fullName.push(`${names.first_name} ${names.last_name}`)
+    //console.log(value.first_name)
 });
+console.log(fullName);
 
 // ==== Challenge 2: Use .map() ====
 // The event director needs to have all the runner's first names converted to uppercase because the director BECAME DRUNK WITH POWER. Convert each first name into all caps and log the result
 let allCaps = [];
+allCaps = runners.map(function(names) {
+    return names.first_name.toUpperCase()
+});
+
 console.log(allCaps); 
 
 // ==== Challenge 3: Use .filter() ====
 // The large shirts won't be available for the event due to an ordering issue.  Get a list of runners with large sized shirts so they can choose a different size. Return an array named largeShirts that contains information about the runners that have a shirt size of L and log the result
 let largeShirts = [];
+
+largeShirts = runners.filter(shirt => shirt.shirt_size === 'L')
+
 console.log(largeShirts);
 
-// ==== Challenge 4: Use .reduce() ====
+// // ==== Challenge 4: Use .reduce() ====
 // The donations need to be tallied up and reported for tax purposes. Add up all the donations into a ticketPriceTotal array and log the result
 let ticketPriceTotal = [];
+
+ticketPriceTotal = runners.reduce(function(ticket,item){
+
+return ticket += item.donation;
+},0);
+
 console.log(ticketPriceTotal);
 
 // ==== Challenge 5: Be Creative ====
 // Now that you have used .forEach(), .map(), .filter(), and .reduce().  I want you to think of potential problems you could solve given the data set and the 5k fun run theme.  Try to create and then solve 3 unique problems using one or many of the array methods listed above.
 
-// Problem 1
+// Problem 1: Find which company donated the most and output: companyName donationValue.
+let maxVal = 0;
+let biggestCompany = [];
+
+runners.forEach(function(value){
+    if(value.donation > maxVal){
+        maxVal = value.donation;
+    }
+});
+
+runners.filter(function(value){
+    if(value.donation === maxVal){
+        console.log(`${value.company_name} ${maxVal}`);
+        return;
+    }
+});
+
+
+// Problem 2: if donations are over 50 dollars then gather the emails of the individuals to send a special thank you.
+let runnerMail = [];
+let runnerabv50 = [];
+runnerabv50 = runners.filter(function(value){
+    return value.donation > 50;
+});
+
+
+runnerabv50.forEach(function(value){
+
+ runnerMail.push(`${value.email}`)
+ 
+});
+console.log(runnerMail)
+
+// Find out who wears a size small in the list of runners. 
+let sizeSmall = [];
+
+runners.filter((runner) => {
+
+    if(runner.shirt_size === "S"){
+
+        sizeSmall.push(runner.first_name + " " + runner.last_name);
+    }
+});
+console.log(sizeSmall);
 
 // Problem 2
+//The t-shirt supplier needs to know how many of each kind of shirt they will need to ship. Make an array for each size.
+let sCount = [];
+sCount = runners.filter((runner) =>{
+    return runner.shirt_size === 'S';
+})
+let mCount = [];
+mCount = runners.filter((runner) =>{
+    return runner.shirt_size === 'M';
+})
+let lCount = [];
+lCount = runners.filter((runner) =>{
+    return runner.shirt_size === 'L';
+})
+let xlCount = [];
+xlCount = runners.filter((runner) =>{
+    return runner.shirt_size === 'XL';
+})
+let xxlCount = [];
+xxlCount = runners.filter((runner) =>{
+    return runner.shirt_size === '2XL';
+})
+let xxxlCount = [];
+xxxlCount = runners.filter((runner) =>{
+    return runner.shirt_size === '3XL';
+})
 
-// Problem 3
+console.log(`We will need ${sCount.length} small, ${mCount.length} medium, ${lCount.length} large, ${xlCount.length} xl, ${xxlCount.length} xxl, and ${xxxlCount.length} 3xl shirts.`);
+

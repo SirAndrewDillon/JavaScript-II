@@ -5,9 +5,7 @@ const items = ['Pencil', 'Notebook', 'yo-yo', 'Gum'];
 
   //Given this problem: 
   
-  function firstItem(arr, cb) {
-    // firstItem passes the first item of the given array to the callback function.
-  }
+  
   // Potential Solution:
   // Higher order function using "cb" as the call back
   function firstItem(arr, cb) {
@@ -31,13 +29,22 @@ const items = ['Pencil', 'Notebook', 'yo-yo', 'Gum'];
   });
   
 
-function last(arr, cb) {
+// function last(arr, cb) {
+//   // last passes the last item of the array into the callback.
+//   cb(items.length[-1]);
+//   lastItem(items, cb function(last) {
+//     console.log(last);
+// });
+// }
+
+function veryLast(arr, cb) {
   // last passes the last item of the array into the callback.
-  cb(items.length[-1]);
-  lastItem(items, function(last) {
-    console.log(last);
-});
+  cb(items[items.length - 1]);
 }
+
+veryLast(items, function(last) {
+  console.log(last);
+});
 
 
 function sumNums(x, y, cb) {
